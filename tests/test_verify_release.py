@@ -17,13 +17,13 @@ class ReleaseArchiveTests(unittest.TestCase):
                   'RequiredOnRemote': False, 'GameVersion': '>=513885'}
 
     def files(self):
-        files = {'ParametricRoads.uplugin': json.dumps(self.descriptor).encode()}
+        files = {'Roadworks.uplugin': json.dumps(self.descriptor).encode()}
         for store in ('Steam', 'EGS'):
             stem = f'FactoryGame{store}'
-            files[f'Binaries/Win64/{stem}-ParametricRoads-Win64-Shipping.dll'] = b'fixture'
-            files[f'Binaries/Win64/{stem}-Win64-Shipping.modules'] = json.dumps({'Modules': {'ParametricRoads': 'fixture'}}).encode()
+            files[f'Binaries/Win64/{stem}-Roadworks-Win64-Shipping.dll'] = b'fixture'
+            files[f'Binaries/Win64/{stem}-Win64-Shipping.modules'] = json.dumps({'Modules': {'Roadworks': 'fixture'}}).encode()
         for ext in ('pak', 'utoc', 'ucas'):
-            files[f'Content/Paks/Windows/ParametricRoads.{ext}'] = b'fixture'
+            files[f'Content/Paks/Windows/Roadworks.{ext}'] = b'fixture'
         for name, source in [('License.txt', 'LICENSE'), ('AssetLicense.txt', 'ASSET_LICENSE.md'), ('ThirdPartyNotices.txt', 'THIRD_PARTY_NOTICES.md')]:
             files['Resources/' + name] = (release.ROOT / source).read_bytes()
         return files
@@ -37,7 +37,7 @@ class ReleaseArchiveTests(unittest.TestCase):
                 if duplicate:
                     with warnings.catch_warnings():
                         warnings.simplefilter('ignore', UserWarning)
-                        package.writestr(prefix + 'ParametricRoads.uplugin', b'{}')
+                        package.writestr(prefix + 'Roadworks.uplugin', b'{}')
             return release.inspect_package(path, self.descriptor, prefix)
 
     def test_native_merged_payload_matches_platform_payload(self):
@@ -50,7 +50,7 @@ class ReleaseArchiveTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     self.inspect(files)
         files = self.files()
-        del files['Binaries/Win64/FactoryGameEGS-ParametricRoads-Win64-Shipping.dll']
+        del files['Binaries/Win64/FactoryGameEGS-Roadworks-Win64-Shipping.dll']
         with self.assertRaisesRegex(ValueError, 'Missing EGS'):
             self.inspect(files)
 
@@ -61,7 +61,7 @@ class ReleaseArchiveTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'notice'):
             self.inspect(files)
         files = self.files(); packed = dict(self.descriptor, VersionName='old')
-        files['ParametricRoads.uplugin'] = json.dumps(packed).encode()
+        files['Roadworks.uplugin'] = json.dumps(packed).encode()
         with self.assertRaisesRegex(ValueError, 'Version mismatch'):
             self.inspect(files)
 

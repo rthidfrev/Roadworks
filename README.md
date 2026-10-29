@@ -1,6 +1,6 @@
 # Roadworks
 
-<img src="Mods/ParametricRoads/Resources/Icon128.png" alt="Roadworks" width="320">
+<img src="Mods/Roadworks/Resources/Icon128.png" alt="Roadworks" width="320">
 
 **[Player guide](docs/USER_GUIDE.md)** · **[Report a bug](https://github.com/rthidfrev/Roadworks/issues/new?template=01-bug-report.yml)** · **[Suggest an idea](https://github.com/rthidfrev/Roadworks/issues/new?template=02-feature-request.yml)**
 
@@ -71,6 +71,6 @@ details can be added later.
 ## Source and licenses
 
 - [Build and test](docs/DEVELOPMENT.md) · [Architecture](docs/REQUIREMENTS.md) · [FICSIT.app listing copy](docs/FICSIT_APP.md)
-- Plugin source and worldless tests: `Mods/ParametricRoads/`. The internal reference stays stable for existing bindings and presets.
+- Plugin source and worldless tests: `Mods/Roadworks/`.
 - Current monitor V2 model, textures, FBXs and audio: `art/road-monitor/`.
 - Code, scripts and documentation: [MIT](LICENSE). Original monitor assets: [CC BY 4.0](ASSET_LICENSE.md). [Third-party notices](THIRD_PARTY_NOTICES.md).

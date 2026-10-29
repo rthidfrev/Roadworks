@@ -53,7 +53,7 @@ layers. **Update selected** replaces a preset and retains its previous JSON as
 `.bak`. Loading starts a new route; an existing preview requires confirmation.
 Missing or renamed blueprints block loading without changing that preview.
 
-Files live in `ParametricRoads/Presets` under the game's Saved directory, normally
+Files live in `ParametricRoads/Presets` (the legacy storage folder) under the game's Saved directory, normally
 `%LOCALAPPDATA%/FactoryGame/Saved` on Windows or its equivalent in the Proton prefix.
 The footer tooltip shows the resolved folder. Share the GUID-named JSON file and
 copy its referenced blueprints separately. Names must match exactly. Schema v1

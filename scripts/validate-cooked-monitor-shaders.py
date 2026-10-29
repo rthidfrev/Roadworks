@@ -11,7 +11,7 @@ ISG1/OSG1 or legacy ISGN/OSGN signature chunks. Unsupported formats fail closed.
 Example:
   python3 scripts/validate-cooked-monitor-shaders.py \
     --stable-key-dump /absolute/path/stable-keys-full.log \
-    --archive /absolute/path/ShaderArchive-ParametricRoads-PCD3D_SM6-PCD3D_SM6.ushaderbytecode \
+    --archive /absolute/path/ShaderArchive-Roadworks-PCD3D_SM6-PCD3D_SM6.ushaderbytecode \
     --report /absolute/path/monitor-shader-verification.json
 
 Generate the full dump separately, without an output-hash filter:
@@ -30,7 +30,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parent.parent
-FOLDER = '/ParametricRoads/Monitor/Materials/'
+FOLDER = '/Roadworks/Monitor/Materials/'
 MATERIALS = tuple(FOLDER + name for name in (
     'M_RoadMonitorWidget', 'MI_RoadMonitor_V2'))
 DEFAULT_OODLE = ROOT / ('.local/UnrealEngineCSS/Engine/Source/Programs/UnrealBuildTool/'
@@ -64,7 +64,7 @@ def read_file(path):
 def stable_pairs(text):
     """Accept real commandlet log prefixes and repeated console log lines."""
     groups = {name: {} for name in MATERIALS}
-    pattern = re.compile(r'(?:MaterialInstanceConstant|Material) /ParametricRoads/Monitor/Materials/[^\r\n]+')
+    pattern = re.compile(r'(?:MaterialInstanceConstant|Material) /Roadworks/Monitor/Materials/[^\r\n]+')
     for line in text.splitlines():
         found = pattern.search(line)
         if not found:

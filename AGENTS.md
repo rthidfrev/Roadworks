@@ -3,7 +3,7 @@
 Read `docs/REQUIREMENTS.md`, `docs/DEVELOPMENT.md` and `environment.lock.json`
 before modifying the plugin.
 
-- Maintain authored sources in `Mods/ParametricRoads`; the SDK uses a symlink.
+- Maintain authored sources in `Mods/Roadworks`; the SDK uses a symlink.
   `.local/` is a private dependency/cache directory and `dist/` contains output.
 - Use the pinned CSS engine and SML. FactoryGame C++ bodies in the starter are
   generated stubs; inspect declarations before choosing APIs.

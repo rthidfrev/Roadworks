@@ -8,13 +8,10 @@ future captures and stay invisible in the rendered description.
 | Field | Value |
 | --- | --- |
 | Name | Roadworks |
-| Mod reference | `ParametricRoads` |
-| Tags | `buildgun`, `blueprints`, `qol`, `decoration` |
+| Mod reference | `Roadworks` |
+| Tags | `buildgun`, `blueprints`, `qol`, `decoration`, `vanilla-friendly` |
 | Source | https://github.com/rthidfrev/Roadworks |
-| Icon | [Approved Roadworks logo](../Mods/ParametricRoads/Resources/Icon128.png) |
-
-The reference matches the existing plugin. Keep `vanilla-friendly` and
-`multiplayer` off until their in-game compatibility checks are complete.
+| Icon | [Roadworks logo](../Mods/Roadworks/Resources/Icon128.png) |
 
 ### Short description
 

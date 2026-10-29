@@ -8,7 +8,7 @@ set +e
 "$UE_CSS_ROOT/Engine/Binaries/Linux/UnrealEditor-Cmd" \
     "$SATISFACTORY_STARTER/FactoryGame.uproject" \
     -unattended -RenderOffscreen -nosplash -nosound \
-    '-ExecCmds=Automation RunTests ParametricRoads.Editor' \
+    '-ExecCmds=Automation RunTests Roadworks.Editor' \
     '-TestExit=Automation Test Queue Empty' "-abslog=$test_log" \
     > "$SATISFACTORY_DEV_ROOT/.local/logs/release-editor-tests.console.log" 2>&1
 test_exit=$?

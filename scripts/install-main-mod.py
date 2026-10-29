@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Install only the verified local ParametricRoads candidate in normal Steam.
+"""Install only the verified local Roadworks candidate in normal Steam.
 
 Does not run the game or alter SML, Mod Manager profiles, settings or saves.
-Existing ParametricRoads files are backed up outside Mods before replacement.
+Existing Roadworks and pre-release ParametricRoads files are backed up outside Mods.
+The old reference is removed only after staging the renamed candidate.
 """
 import argparse
 from datetime import datetime, timezone
@@ -17,6 +18,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
 GAME = Path.home() / ".local/share/Steam/steamapps/common/Satisfactory"
+PLUGIN_REFERENCES = ("Roadworks", "ParametricRoads")
 USER_DATA = (Path.home() / ".local/share/Steam/steamapps/compatdata/526870/pfx/drive_c/users"
              / "steamuser/AppData/Local/FactoryGame/Saved")
 
@@ -44,9 +46,10 @@ def no_game_running():
 def preserved_files(mods):
     files = {}
     for path in mods.rglob("*"):
-        if path.is_file() and path.relative_to(mods).parts[0] != "ParametricRoads":
+        if path.is_file() and path.relative_to(mods).parts[0] not in PLUGIN_REFERENCES:
             files[str(path)] = digest(path)
-    for folder in (USER_DATA / "Config", USER_DATA / "SaveGames", USER_DATA / "ParametricRoads",
+    for folder in (USER_DATA / "Config", USER_DATA / "SaveGames", USER_DATA / "Roadworks",
+                   USER_DATA / "ParametricRoads", GAME / "FactoryGame/Saved/Roadworks",
                    GAME / "FactoryGame/Saved/ParametricRoads"):
         if folder.exists():
             for path in folder.rglob("*"):
@@ -72,7 +75,7 @@ def main():
         raise SystemExit("Archive does not match the verified manifest.")
     game = GAME.resolve()
     mods = game / "FactoryGame/Mods"
-    destination = mods / "ParametricRoads"
+    destination = mods / "Roadworks"
     if not (game / "FactoryGameSteam.exe").is_file():
         raise SystemExit("Normal Steam installation not found.")
     lock = json.loads((ROOT / "environment.lock.json").read_text())
@@ -83,11 +86,15 @@ def main():
     sml = json.loads((mods / "SML/SML.uplugin").read_text())
     if sml["VersionName"] != manifest["sml_version"]:
         raise SystemExit("Installed SML differs from the candidate version.")
-    if mods.is_symlink() or destination.is_symlink():
+    previous = [mods / reference for reference in PLUGIN_REFERENCES]
+    if mods.is_symlink() or any(path.is_symlink() for path in previous):
         raise SystemExit("Refusing a symlinked Mods or plugin directory.")
-    for descriptor in mods.rglob("ParametricRoads.uplugin"):
-        if descriptor != destination / "ParametricRoads.uplugin":
-            raise SystemExit(f"Additional ParametricRoads installation: {descriptor}")
+    for reference, path in zip(PLUGIN_REFERENCES, previous):
+        for found in mods.rglob(reference + ".uplugin"):
+            if found != path / (reference + ".uplugin"):
+                raise SystemExit(f"Additional {reference} installation: {found}")
+        if path.exists() and not (path / (reference + ".uplugin")).is_file():
+            raise SystemExit(f"Existing directory is not identified as {reference}.")
     no_game_running()
     with zipfile.ZipFile(archive) as package:
         if package.testzip() is not None:
@@ -98,7 +105,7 @@ def main():
                 raise SystemExit("Unexpected archive path.")
             if stat.S_ISLNK(info.external_attr >> 16):
                 raise SystemExit("Unexpected archive symlink.")
-        descriptor = json.loads(package.read("ParametricRoads.uplugin"))
+        descriptor = json.loads(package.read("Roadworks.uplugin"))
         if descriptor["VersionName"] != manifest["version"]:
             raise SystemExit("Descriptor and manifest versions differ.")
         if args.check_only:
@@ -112,32 +119,30 @@ def main():
             "version": manifest["version"], "commit": manifest["commit"],
             "archive": str(archive), "archive_sha256": manifest["sha256"],
             "destination": str(destination), "preserved_sha256": before,
-            "state": "prepared", "backup": None,
+            "state": "prepared", "backup": None, "backups": {},
         }
         receipt_path = operation / "receipt.json"
         receipt_path.write_text(json.dumps(receipt, indent=2) + "\n")
-        incoming = mods / (".ParametricRoads-incoming-" + stamp)
-        rollback = game / "FactoryGame" / (".ParametricRoads-rollback-" + stamp)
+        incoming = mods / (".Roadworks-incoming-" + stamp)
+        rollbacks = {}
         activated = False
         try:
             incoming.mkdir()
             package.extractall(incoming)
-            if destination.exists():
-                if not (destination / "ParametricRoads.uplugin").is_file():
-                    raise RuntimeError("Existing directory is not identified as ParametricRoads.")
-                backup = operation / "ParametricRoads-before"
-                shutil.copytree(destination, backup)
-                receipt["backup"] = str(backup)
+            for path in previous:
+                if path.exists():
+                    backup = operation / (path.name + "-before")
+                    shutil.copytree(path, backup)
+                    receipt["backups"][path.name] = str(backup)
+            receipt["backup"] = next(iter(receipt["backups"].values()), None)
             no_game_running()
-            if destination.exists():
-                destination.rename(rollback)
-            try:
-                incoming.rename(destination)
-                activated = True
-            except BaseException:
-                if rollback.exists():
-                    rollback.rename(destination)
-                raise
+            for path in previous:
+                if path.exists():
+                    rollback = game / "FactoryGame" / ("." + path.name + "-rollback-" + stamp)
+                    path.rename(rollback)
+                    rollbacks[path] = rollback
+            incoming.rename(destination)
+            activated = True
             expected = {info.filename: hashlib.sha256(package.read(info)).hexdigest()
                         for info in package.infolist() if not info.is_dir()}
             actual = {str(p.relative_to(destination)): digest(p)
@@ -145,8 +150,8 @@ def main():
             if actual != expected:
                 raise RuntimeError("Installed copy differs from the archive.")
             if preserved_files(mods) != before:
-                raise RuntimeError("A file outside ParametricRoads changed during installation.")
-            if rollback.exists():
+                raise RuntimeError("A file outside Roadworks changed during installation.")
+            for rollback in rollbacks.values():
                 shutil.rmtree(rollback)  # A complete backup is retained in operation/.
             receipt.update(state="installed", installed_sha256=actual,
                            unrelated_mods_settings_saves_unchanged=True)
@@ -154,12 +159,11 @@ def main():
             print("Other mods, profiles, settings, blueprints and saves: hashes unchanged.")
         except BaseException as error:
             receipt.update(state="failed", error=str(error))
-            if rollback.exists():
-                if destination.exists():
-                    shutil.move(str(destination), str(operation / "failed-candidate"))
-                rollback.rename(destination)
-            elif activated and destination.exists():
+            if activated and destination.exists():
                 shutil.move(str(destination), str(operation / "failed-candidate"))
+            for path, rollback in rollbacks.items():
+                if rollback.exists():
+                    rollback.rename(path)
             raise
         finally:
             if incoming.exists():

@@ -57,10 +57,15 @@ in the [player guide](USER_GUIDE.md) are required before advertising compatibili
 ## Local installation
 
 With the game closed, `python3 scripts/install-main-mod.py --check-only` checks the
-normal Steam installation. Without that option it updates only ParametricRoads,
-backs up the old plugin and verifies unrelated data. It never launches the game.
+normal Steam installation. Without that option it updates Roadworks, backs up
+and removes the pre-release `ParametricRoads` plugin if present, and verifies
+unrelated data. It never launches the game.
 Use host-visible process checks, not an isolated `/proc` view. The latest backup
 and receipt are recorded in `.local/deploy/latest-receipt.json`.
+
+The plugin, module and content mount are `Roadworks`. Legacy input/volume IDs
+and the preset storage folder are retained for existing preferences and files.
+Native redirects resolve references from pre-release packages.
 
 ## Assets
 

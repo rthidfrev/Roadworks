@@ -12,7 +12,7 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-PLUGIN = ROOT / 'Mods/ParametricRoads'
+PLUGIN = ROOT / 'Mods/Roadworks'
 LOGS = ROOT / '.local/logs'
 FROZEN = LOGS / 'release-frozen-source.json'
 
@@ -35,7 +35,7 @@ def verify_tests(path, editor_exit=None):
     text = path.read_text()
     expected = set()
     for source in (PLUGIN / 'Source').rglob('*.cpp'):
-        expected.update(re.findall(r'IMPLEMENT_SIMPLE_AUTOMATION_TEST\([^,]+,\s*"(ParametricRoads\.Editor\.[^"]+)"', source.read_text()))
+        expected.update(re.findall(r'IMPLEMENT_SIMPLE_AUTOMATION_TEST\([^,]+,\s*"(Roadworks\.Editor\.[^"]+)"', source.read_text()))
     results = re.findall(r'Test Completed\. Result=\{([^}]+)\} Name=\{[^}]+\} Path=\{([^}]+)\}', text)
     require(bool(expected), 'No worldless tests found in source')
     require(len(results) == len(expected) and {name for _, name in results} == expected,
@@ -60,17 +60,17 @@ def inspect_package(archive, descriptor, prefix=''):
             require(info.filename.startswith(prefix), 'Unexpected platform in release')
         relative = [name[len(prefix):] for name in names]
         for name in relative:
-            require(name == 'ParametricRoads.uplugin' or name.startswith(('Binaries/Win64/', 'Content/Paks/Windows/', 'Resources/')),
+            require(name == 'Roadworks.uplugin' or name.startswith(('Binaries/Win64/', 'Content/Paks/Windows/', 'Resources/')),
                     f'Unexpected shipping file: {name}')
             require(not name.lower().endswith(('.ini', '.cpp', '.h', '.blend', '.fbx', '.json')), f'Development data shipped: {name}')
-        packed = json.loads(package.read(prefix + 'ParametricRoads.uplugin'))
+        packed = json.loads(package.read(prefix + 'Roadworks.uplugin'))
         require(packed['VersionName'] == descriptor['VersionName'] == packed['SemVersion'], 'Version mismatch')
         require(packed['RequiredOnRemote'] is False and packed['GameVersion'] == descriptor['GameVersion'], 'Compatibility metadata changed')
         for store in ('Steam', 'EGS'):
             stem = f'FactoryGame{store}'
-            require(f'Binaries/Win64/{stem}-ParametricRoads-Win64-Shipping.dll' in relative, f'Missing {store} binary')
+            require(f'Binaries/Win64/{stem}-Roadworks-Win64-Shipping.dll' in relative, f'Missing {store} binary')
             modules = json.loads(package.read(prefix + f'Binaries/Win64/{stem}-Win64-Shipping.modules'))
-            require(set(modules['Modules']) == {'ParametricRoads'}, 'Foreign module in payload')
+            require(set(modules['Modules']) == {'Roadworks'}, 'Foreign module in payload')
         for name, source in [('License.txt', 'LICENSE'), ('AssetLicense.txt', 'ASSET_LICENSE.md'), ('ThirdPartyNotices.txt', 'THIRD_PARTY_NOTICES.md')]:
             require(package.read(prefix + 'Resources/' + name) == (ROOT / source).read_bytes(), f'Missing/stale notice: {name}')
         for suffix in ('pak', 'utoc', 'ucas'):
@@ -104,12 +104,12 @@ def main():
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     require('Result: Succeeded' in args.build_log.read_text(), 'Linux editor build did not succeed')
     require('BUILD SUCCESSFUL' in (LOGS / 'release-package.console.log').read_text(), 'Windows packaging failed')
-    descriptor = json.loads((PLUGIN / 'ParametricRoads.uplugin').read_text())
+    descriptor = json.loads((PLUGIN / 'Roadworks.uplugin').read_text())
     version = descriptor['SemVersion']
     require(descriptor['VersionName'] == version and descriptor['Version'] == int(version.split('.')[0]), 'Alpakit version fields differ')
-    archive_dir = args.starter / 'Saved/ArchivedPlugins/ParametricRoads'
-    per_platform = archive_dir / 'ParametricRoads-Windows.zip'
-    combined = archive_dir / 'ParametricRoads.zip'
+    archive_dir = args.starter / 'Saved/ArchivedPlugins/Roadworks'
+    per_platform = archive_dir / 'Roadworks-Windows.zip'
+    combined = archive_dir / 'Roadworks.zip'
     files = inspect_package(per_platform, descriptor)
     require(inspect_package(combined, descriptor, 'Windows/') == files, 'Combined release differs from Windows package')
     shader_file = LOGS / 'monitor-shader-verification.json'
@@ -121,7 +121,7 @@ def main():
             'Build/test evidence predates plugin inputs')
     authored = PLUGIN / 'Content'
     assets = sorted(str(path.relative_to(authored)) for path in authored.rglob('*.uasset'))
-    cooked = PLUGIN / 'Saved/Cooked/Windows/FactoryGame/Mods/ParametricRoads/Content'
+    cooked = PLUGIN / 'Saved/Cooked/Windows/FactoryGame/Mods/Roadworks/Content'
     require(bool(assets) and all((cooked / path).is_file() for path in assets), 'An authored asset was not cooked')
     asset_audit = json.loads((LOGS / 'release-assets.json').read_text())
     require(asset_audit['result'] == 'passed' and asset_audit['assets'] == len(assets), 'Asset dependency audit failed')
@@ -156,7 +156,7 @@ def main():
         'manual_qualification': {'dev35_local_use': 'Accepted by the maintainer before source cleanup.',
             'this_candidate_in_game': 'Not yet tested.', 'save_reload_after_removal': 'Not yet tested.',
             'vanilla_host_multiplayer': 'Not yet tested.', 'epic_store_runtime': 'Not yet tested.'}}
-    for name in ('manifest.json', f'ParametricRoads-{version}-manifest.json'):
+    for name in ('manifest.json', f'Roadworks-{version}-manifest.json'):
         (dist / name).write_text(json.dumps(manifest, indent=2) + '\n')
     print(json.dumps({'version': version, 'commit': commit, 'assets': len(assets), 'tests': tests['tests'], 'outputs': outputs}, indent=2))
 
