@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Roadworks player guide
+    url: https://github.com/rthidfrev/Roadworks/blob/main/docs/USER_GUIDE.md
+    about: Learn how to place roads, use layers and manage presets.

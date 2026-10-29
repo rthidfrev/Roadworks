@@ -1,0 +1,33 @@
+name: Feature request or idea
+description: Suggest a new feature or an improvement to Roadworks.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search [existing issues](https://github.com/rthidfrev/Roadworks/issues?q=is%3Aissue) before suggesting an idea.
+  - type: textarea
+    id: use-case
+    attributes:
+      label: What would you like to do?
+      description: Describe the situation or difficulty behind your idea and how it would help when using Roadworks.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Your idea
+      description: Describe the feature or behavior you would like. A rough idea is enough.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or workarounds
+      description: Have you tried another approach? What is missing from it?
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or additional context
+      description: Add screenshots, sketches, links or examples from other tools if useful.

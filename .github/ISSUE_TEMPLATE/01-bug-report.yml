@@ -1,0 +1,81 @@
+name: Bug report
+description: Report a crash, placement problem or unexpected behavior in Roadworks.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search [existing issues](https://github.com/rthidfrev/Roadworks/issues?q=is%3Aissue) before reporting a problem.
+        For help with controls, layers or presets, see the [player guide](https://github.com/rthidfrev/Roadworks/blob/main/docs/USER_GUIDE.md).
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include the actions and settings needed to reproduce the problem. If it is intermittent, describe when it occurs.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: roadworks-version
+    attributes:
+      label: Roadworks version
+      description: Copy the version from Satisfactory Mod Manager or the in-game mod list.
+    validations:
+      required: true
+  - type: input
+    id: game-version
+    attributes:
+      label: Satisfactory version and build
+      description: Copy the game version and CL number shown on the main menu.
+    validations:
+      required: true
+  - type: input
+    id: sml-version
+    attributes:
+      label: Satisfactory Mod Loader version
+      description: Include the SML version if known.
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Windows (Steam)
+        - Windows (Epic)
+        - Linux / Steam Deck (Proton)
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: session
+    attributes:
+      label: Session
+      options:
+        - Single-player
+        - Multiplayer host
+        - Client joining a vanilla host without SML
+        - Client joining a modded host
+        - Dedicated server
+        - Other / unsure
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Other mods and blueprint setup
+      description: List other mods, especially those used by your blueprints. For placement issues, include relevant point/layer settings and any refusal message or progress count.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots, logs and example files
+      description: Paste relevant log excerpts or attach screenshots, a video, or a ZIP containing a minimal blueprint/preset example. Remove personal information before uploading logs or files.
