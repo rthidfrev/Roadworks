@@ -37,9 +37,7 @@ body:
     id: game-version
     attributes:
       label: Satisfactory version and build
-      description: Copy the game version and CL number shown on the main menu.
-    validations:
-      required: true
+      description: If known, copy the game version and CL number shown on the main menu.
   - type: input
     id: sml-version
     attributes:
@@ -54,8 +52,6 @@ body:
         - Windows (Epic)
         - Linux / Steam Deck (Proton)
         - Other
-    validations:
-      required: true
   - type: dropdown
     id: session
     attributes:
@@ -67,8 +63,6 @@ body:
         - Client joining a modded host
         - Dedicated server
         - Other / unsure
-    validations:
-      required: true
   - type: textarea
     id: setup
     attributes:

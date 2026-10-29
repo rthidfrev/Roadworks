@@ -2,6 +2,8 @@
 
 <img src="Mods/ParametricRoads/Resources/Icon128.png" alt="Roadworks" width="320">
 
+**[Player guide](docs/USER_GUIDE.md)** · **[Report a bug](https://github.com/rthidfrev/Roadworks/issues/new?template=01-bug-report.yml)** · **[Suggest an idea](https://github.com/rthidfrev/Roadworks/issues/new?template=02-feature-request.yml)**
+
 A Satisfactory mod for building curved, sloped and banked roads from blueprints.
 Place a start, add intermediate points, set the end and confirm. Add up to eight
 independent decoration layers with 3D spacing and offsets, then save the
@@ -17,9 +19,14 @@ Satisfactory **CL 513885**, **SML 3.12.0**, Windows client (Steam or Epic binari
 The Windows game can run through Proton. Save reload after removing the mod/SML,
 vanilla-host multiplayer and Epic runtime use remain unverified.
 
-- [Player guide](docs/USER_GUIDE.md)
 - [Build and test](docs/DEVELOPMENT.md)
 - [Architecture constraints](docs/REQUIREMENTS.md)
+
+## Feedback
+
+Check [existing reports and ideas](https://github.com/rthidfrev/Roadworks/issues?q=is%3Aissue) before opening an issue.
+A GitHub account is required to submit feedback; sign in when prompted.
+Screenshots, logs and technical details can be added later.
 
 ## Source layout
 
