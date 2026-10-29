@@ -1,0 +1,359 @@
+{
+  "schema_version": 2,
+  "art_version": "V2 Unreal integration",
+  "source_art_contract_sha256": "3edc480c2e1382fea8b110db0f401ebe2d323d5a1ec1bfa084be73d6452c3baf",
+  "units": "cm",
+  "blender_unit_scale": 0.01,
+  "coordinate_system": "Unreal X depth, Y width, Z up; front -X; UE Y = -Blender Y",
+  "fbx": {
+    "axis_forward": "X",
+    "axis_up": "Z",
+    "apply_unit_scale": true,
+    "export_mirror_y": false,
+    "unreal_force_front_x_axis": false,
+    "generate_lightmap_uvs": false
+  },
+  "screen": {
+    "position_cm": [
+      -2.22,
+      0,
+      0
+    ],
+    "width_cm": 29,
+    "height_cm": 19.4,
+    "front_normal": [
+      -1,
+      0,
+      0
+    ],
+    "draw_size": [
+      1024,
+      688
+    ]
+  },
+  "assembly": {
+    "mount_cm": [
+      6.8,
+      -20,
+      -1
+    ],
+    "arm_pivot_cm": [
+      5.8,
+      -19,
+      0
+    ],
+    "screen_pivot_cm": [
+      0,
+      11.6,
+      0
+    ],
+    "housing_offset_cm": [
+      -3.5,
+      15.5,
+      0
+    ],
+    "hinge_axis": "X",
+    "unreal_fold_roll_degrees": {
+      "arm": 95,
+      "housing": -80
+    }
+  },
+  "assets": {
+    "Housing": {
+      "file": "exports/SM_RoadMonitorHousing_V2_UE.fbx",
+      "sha256": "ab8a67f95b70aebeb6bba87d309fe533c56ba30e1eed58f0258d56066a06d623",
+      "triangles": 50269,
+      "material_slots": 1,
+      "materials": [
+        "PR2_Baked_PBR"
+      ],
+      "uv_channels": 1,
+      "dimensions_cm": [
+        5.2445,
+        34.595,
+        26.825
+      ],
+      "coordinate_check": {
+        "min_cm": [
+          -2.292,
+          -17.2975,
+          -14.125
+        ],
+        "max_cm": [
+          2.9525,
+          17.2975,
+          12.7
+        ],
+        "landmarks_cm": [
+          [
+            -2.292,
+            15.9177,
+            -11.3
+          ],
+          [
+            -2.292,
+            15.9177,
+            11.3
+          ],
+          [
+            -2.292,
+            15.8588,
+            -11.4019
+          ],
+          [
+            -2.292,
+            15.8588,
+            -11.1981
+          ],
+          [
+            -2.292,
+            15.8588,
+            11.1981
+          ],
+          [
+            2.9525,
+            -2.7463,
+            -2.4197
+          ],
+          [
+            2.9525,
+            -2.7463,
+            0.9197
+          ],
+          [
+            2.9525,
+            -2.7463,
+            1.0803
+          ],
+          [
+            2.9525,
+            -2.7927,
+            -2.5
+          ],
+          [
+            2.9525,
+            -2.7927,
+            1.0
+          ]
+        ]
+      }
+    },
+    "Arm": {
+      "file": "exports/SM_RoadMonitorArm_V2_UE.fbx",
+      "sha256": "09a0d410efa8c621c7eeee4dc41381457efc363423a4d8f0037ab1dbdf3c86c3",
+      "triangles": 26134,
+      "material_slots": 1,
+      "materials": [
+        "PR2_Baked_PBR"
+      ],
+      "uv_channels": 1,
+      "dimensions_cm": [
+        3.995,
+        16.17,
+        4.57
+      ],
+      "coordinate_check": {
+        "min_cm": [
+          -2.245,
+          -2.285,
+          -2.285
+        ],
+        "max_cm": [
+          1.75,
+          13.885,
+          2.285
+        ],
+        "landmarks_cm": [
+          [
+            -2.245,
+            11.9027,
+            0.0
+          ],
+          [
+            -2.245,
+            11.7513,
+            -0.2621
+          ],
+          [
+            -2.245,
+            11.7513,
+            0.2621
+          ],
+          [
+            -2.245,
+            11.4487,
+            -0.2621
+          ],
+          [
+            -2.245,
+            11.4487,
+            0.2621
+          ],
+          [
+            1.75,
+            -1.9092,
+            -1.1023
+          ],
+          [
+            1.75,
+            -1.9092,
+            1.1023
+          ],
+          [
+            1.75,
+            -2.1295,
+            -0.5706
+          ],
+          [
+            1.75,
+            -2.1295,
+            0.5706
+          ],
+          [
+            1.75,
+            -2.2046,
+            -0.0
+          ]
+        ]
+      }
+    },
+    "Mount": {
+      "file": "exports/SM_RoadMonitorMount_V2_UE.fbx",
+      "sha256": "d19231a21006198bb7be1c528bd85435d5648a3769ef6251523180bcfbf8d67f",
+      "triangles": 3764,
+      "material_slots": 1,
+      "materials": [
+        "PR2_Baked_PBR"
+      ],
+      "uv_channels": 1,
+      "dimensions_cm": [
+        5.192,
+        6.21,
+        6.725
+      ],
+      "coordinate_check": {
+        "min_cm": [
+          -2.792,
+          -3.31,
+          -3.35
+        ],
+        "max_cm": [
+          2.4,
+          2.9,
+          3.375
+        ],
+        "landmarks_cm": [
+          [
+            -2.792,
+            0.37,
+            -2.1
+          ],
+          [
+            -2.792,
+            0.37,
+            2.1
+          ],
+          [
+            -2.792,
+            0.3629,
+            -2.1722
+          ],
+          [
+            -2.792,
+            0.3629,
+            -2.0278
+          ],
+          [
+            -2.792,
+            0.3629,
+            2.0278
+          ],
+          [
+            2.3399,
+            -2.6747,
+            2.9
+          ],
+          [
+            2.4,
+            2.45,
+            -2.9
+          ],
+          [
+            2.4,
+            2.45,
+            2.9
+          ],
+          [
+            2.4,
+            -2.45,
+            -2.9
+          ],
+          [
+            2.4,
+            -2.45,
+            2.9
+          ]
+        ]
+      }
+    }
+  },
+  "material": {
+    "name": "PR2_Baked_PBR",
+    "uv_channel": 0,
+    "basecolor": {
+      "file": "T_RoadMonitorV2_BaseColor.png",
+      "srgb": true
+    },
+    "orm": {
+      "file": "T_RoadMonitorV2_ORM.png",
+      "srgb": false,
+      "channels": "R=ambient occlusion, G=roughness, B=metallic"
+    },
+    "normal_unreal": {
+      "file": "T_RoadMonitorV2_NormalDX.png",
+      "srgb": false,
+      "convention": "DirectX (-Y green)"
+    },
+    "normal_blender": {
+      "file": "T_RoadMonitorV2_NormalGL.png",
+      "srgb": false,
+      "convention": "OpenGL (+Y green)"
+    }
+  },
+  "textures": {
+    "T_RoadMonitorV2_BaseColor.png": {
+      "sha256": "a7bde3a1d3eabb61c5e0c9138b84c86d131d745619f3cca9b07536fb5c503b70",
+      "size_px": [
+        2048,
+        2048
+      ]
+    },
+    "T_RoadMonitorV2_NormalDX.png": {
+      "sha256": "bbac1d97d78ab47af9bc035d0af8fcfd78769dbe53acf1b552a22ba246c91a62",
+      "size_px": [
+        2048,
+        2048
+      ]
+    },
+    "T_RoadMonitorV2_NormalGL.png": {
+      "sha256": "a69769cf7510fa8193e1ba65da6848dd49414ba7e9a34bf6bf048e20083daf5b",
+      "size_px": [
+        2048,
+        2048
+      ]
+    },
+    "T_RoadMonitorV2_ORM.png": {
+      "sha256": "9f3577e78755580a09e36513a66386bbc5593b31baa70e538777d95cbfa525ea",
+      "size_px": [
+        2048,
+        2048
+      ]
+    }
+  },
+  "notes": [
+    "Derived export of the V2 source; procedural geometry and baked maps are unchanged.",
+    "Text local +X maps to Blender -Y; UE Y reflection preserves front-view reading.",
+    "Mirror all assembly Y offsets and hinge roll signs; keep the dynamic widget native and unmirrored.",
+    "Import checks must compare these UE coordinates, not the original Blender coordinate bounds."
+  ]
+}

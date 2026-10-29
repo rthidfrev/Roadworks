@@ -1,0 +1,59 @@
+{
+  "game": {
+    "steam_app_id": "526870",
+    "steam_build_id": "25782416",
+    "observed_changelist": "513885",
+    "observed_engine": "5.6.1"
+  },
+  "starter": {
+    "repository": "https://github.com/satisfactorymodding/SatisfactoryModLoader.git",
+    "branch_observed": "master",
+    "commit": "8eebc9e659f0b2ff4392d2f8cf6e2cff60c8ea49",
+    "sml_version": "3.12.0"
+  },
+  "engine": {
+    "repository": "https://github.com/satisfactorymodding/UnrealEngine",
+    "association": "5.6.1-CSS",
+    "release_tag": "5.6.1-css-83",
+    "archives": [
+      {
+        "name": "UnrealEngine-CSS-Editor-Linux.tar.zst.00",
+        "size": 2147483647,
+        "digest": "sha256:5847a80489d04e7ec231de01c154e1046174aa69f5d2c00023a62a67626001e7"
+      },
+      {
+        "name": "UnrealEngine-CSS-Editor-Linux.tar.zst.01",
+        "size": 2147483647,
+        "digest": "sha256:06e8177c34ac2cae5568a71dc92b735162ee29987e964ecf312620f0b11a8d9f"
+      },
+      {
+        "name": "UnrealEngine-CSS-Editor-Linux.tar.zst.02",
+        "size": 2147483647,
+        "digest": "sha256:b624c15b9becf336b6ed4e71b73498f208d3f6edaf857e0bcdcebce7540a9362"
+      },
+      {
+        "name": "UnrealEngine-CSS-Editor-Linux.tar.zst.03",
+        "size": 1821888999,
+        "digest": "sha256:565829545aff54f3771ac80d00e6edea38fd0a235c723c55be063f563aadb049"
+      }
+    ]
+  },
+  "msvc_wine": {
+    "repository": "https://github.com/mircearoata/msvc-wine.git",
+    "branch_observed": "ue-patches",
+    "commit": "61b7cbc8cb9413fec8f0016ef433a90e06c37f54",
+    "visual_studio_version": "17.8",
+    "msvc_version": "14.38",
+    "windows_sdk": "10.0.22621",
+    "channel": "release.ltsc.17.8"
+  },
+  "wwise_cli": {
+    "version": "v0.2.4",
+    "asset": "wwise-cli_linux_amd64",
+    "sha256": "23ff2858e275ed33c02fad7ab96b0bab12c8a0c2015a90c6df820a55dca6ea9f"
+  },
+  "wwise": {
+    "sdk": "2025.1.6.9117",
+    "unreal_integration": "2025.1.6.4248"
+  }
+}

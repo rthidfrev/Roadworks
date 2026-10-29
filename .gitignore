@@ -1,0 +1,38 @@
+.local/
+dist/
+.vscode/
+__pycache__/
+*.pyc
+
+# Unreal build products.
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+*.sln
+*.suo
+*.sdf
+*.VC.db
+
+# Keep editable Blender sources and baked maps; regenerate exports and previews.
+*.blend[0-9]
+
+# Reproducible art handoffs and review images are local, never shipped.
+/art/road-monitor/exports/
+/art/road-monitor/previews/
+/art/road-monitor/v2/exports/
+/art/road-monitor/v2/previews/
+/art/ui/retro-worksheet/*.png
+
+# Local credentials, editor state and temporary files.
+.env
+.env.*
+!.env.example
+.idea/
+*.tmp
+*.swp
+*~
+
+# Machine-local editor tooling; excluded from the public source tree.
+/tooling
+/scripts/run-unreal-mcp.sh

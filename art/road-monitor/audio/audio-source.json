@@ -1,0 +1,25 @@
+{
+  "origin": "Original deterministic synthesis for Roadworks; no third-party recordings",
+  "clips": [
+    {
+      "file": "art/road-monitor/audio/RoadMonitorDeploy.wav",
+      "seconds": 0.54,
+      "frames": 25920,
+      "rate": 48000,
+      "channels": 1,
+      "peak": 0.41998291015625,
+      "rms": 0.14238579845819926,
+      "sha256": "e07076db0b62d94b24009053eea93de0addafbe5047f368b2062fab21104980c"
+    },
+    {
+      "file": "art/road-monitor/audio/RoadMonitorRetract.wav",
+      "seconds": 0.43,
+      "frames": 20640,
+      "rate": 48000,
+      "channels": 1,
+      "peak": 0.41998291015625,
+      "rms": 0.14850417732599425,
+      "sha256": "fe21eed4bebbbc8b8e36f7660243b91fe775d5678a80c5ae2ba5a5e98c11a0be"
+    }
+  ]
+}
